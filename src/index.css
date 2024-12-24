@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 67%;
+}
+
+body {
+  background-color: rgba(50, 50, 50, 0.062);
+  font-family: "Poppins", serif;
+}
+
+.container h1 {
+  font-size: 5rem;
+  color: transparent;
+
+  background: linear-gradient(
+    to right,
+    rgb(0, 149, 255),
+    #1c5cffae,
+    rgb(137, 2, 255)
+  );
+
+  background-clip: text;
+}
+
+.container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 5rem;
+}
+
+.clock {
+  background: linear-gradient(
+    to right,
+    rgb(0, 73, 126),
+    #1c5cffae,
+    rgb(137, 2, 255)
+  );
+  box-shadow: 1px 1px 10px 1px black;
+
+  height: 60%;
+  width: 50%;
+  border-radius: 4rem;
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+}
+
+.DOB {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date {
+  padding: 1rem;
+}
+
+.input {
+  margin-left: 1rem;
+  border: none;
+  width: 5rem;
+  padding: 0.3rem;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.226);
+}
+
+.input:focus {
+  box-shadow: 0.5px 0.5px 4px 0.2px black;
+}
+
+.btn {
+  color: black;
+  background-color: #d8fe42;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px 1px #eaff48;
+  cursor: pointer;
+  animation-duration: 1s;
+  margin: 0 0.3rem;
+  transition: all;
+  transition-duration: 0.3s;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #afdb02;
+  box-shadow: 1px 1px 7px 3px #eeff00;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.message {
+  text-align: center;
+  /* font-size: 1.3rem; */
+}
+.mainComp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.resultContainer .btn {
+  width: 50%;
+  padding: 0.3rem;
+}
+
+.resultContainer .btn:hover {
+  background-color: #afdb02;
+  box-shadow: 1px 1px 7px 3px #eeff00;
+  width: 52%;
+}
+
+.resultDisplayContainer {
+  font-size: 1.5rem;
+  background-color: rgba(6, 6, 6, 0.212);
+  height: 100%;
+  display: grid;
+  border-radius: 2rem;
+  justify-content: center;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.disable_btn {
+  text-decoration: line-through;
+}
+
+.cross {
+  border: none;
+  background: transparent;
+  background-color: rgba(0, 0, 0, 0.247);
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  justify-self: right;
+}
+
+.cross:hover {
+  background: rgba(0, 0, 0, 0.463);
+}
+
+@media screen and (max-width: 600px) {
+  .clock {
+    width: 90%;
+    height: 70%;
+  }
+  .input {
+    margin-left: 0rem;
+    width: 5rem;
+    font-size: 0.9rem;
+    padding: 0.9rem;
+  }
+  .date {
+    padding: 0rem;
+    display: grid;
+    margin: 1rem;
+  }
+  .DOB {
+    display: grid;
+    grid-template-rows: 0.5fr 1fr 0.7fr;
+  }
+  .DOB .btn {
+    margin: 1rem;
+    padding: 0.7rem;
+  }
+  .btnGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .resultContainer .btn {
+    width: 80%;
+    padding: 0.3rem;
+  }
+}
+
+/* @media screen and (max-width: 400px) {
+  .input {
+    margin-left: 0rem;
+    width: 5.4rem;
+    font-size: 0.9rem;
+  }
+  .date {
+    padding: 0.5rem;
+  }
+} */
