@@ -11,6 +11,7 @@ function App() {
   const d = new Date();
 
   function checkInput() {
+    setIsDisplay(false);
     if (date.length !== 2 || date > 31 || date < 1)
       setMessage("Error in date: should be between 1 - 31");
     else if (month.length !== 2 || month > 12 || month < 1)
@@ -31,6 +32,7 @@ function App() {
     setCorrect(true);
     setIsDisplay(false);
   }
+
   const d2 = new Date(`${month}/${date}/${d.getFullYear()}`);
   const d3 = new Date(`${month}/${date}/${year}`);
   const totalYears = d.getFullYear() - year;
@@ -66,7 +68,7 @@ function App() {
       setResult(`${totalSecond} Seconds`);
     } else if (option === "aa") {
       setResult(
-        `${totalYears} Years, ${monthInYear} months, ${totalDaysInYear} Days ,${d.getHours()} hours, ${d.getMinutes()} Minutes and ${d.getSeconds()} seconds`
+        `${totalYears} Years, ${monthInYear} months, ${d.getDate()} Days ,${d.getHours()} hours, ${d.getMinutes()} Minutes and ${d.getSeconds()} seconds`
       );
     }
     setIsDisplay(true);
@@ -114,10 +116,10 @@ function App() {
             </div>
 
             <div className="btnGroup">
-              <button onClick={checkInput} className="btn">
+              <button onClick={() => checkInput()} className="btn">
                 Submit
               </button>
-              <button onClick={clearInput} className="btn">
+              <button onClick={() => clearInput()} className="btn">
                 Clear
               </button>
             </div>

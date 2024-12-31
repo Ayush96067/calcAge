@@ -26,18 +26,19 @@ body {
     #1c5cffae,
     rgb(137, 2, 255)
   );
-
   background-clip: text;
 }
 
 .container {
   color: white;
   display: flex;
+  max-width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   gap: 5rem;
+  background-color: rgba(128, 128, 128, 0.103);
 }
 
 .clock {
