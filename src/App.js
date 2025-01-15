@@ -35,11 +35,14 @@ function App() {
 
   const d2 = new Date(`${month}/${date}/${d.getFullYear()}`);
   const d3 = new Date(`${month}/${date}/${year}`);
-  const totalYears = d.getFullYear() - year;
   const totalDaysInYear =
     Math.round((d.getTime() - d2.getTime()) / (1000 * 3600 * 24)) - 1;
-  const monthInYear = d.getMonth() + 1 - month;
-  const totalMonth = totalYears * 12 + monthInYear;
+  const monthInYear =
+    month > d.getMonth() ? 12 - month + 1 : d.getMonth() + 1 - month;
+  let totalYears = d.getFullYear() - year;
+  totalYears = monthInYear > month ? totalYears - 1 : totalYears;
+  let totalMonth = totalYears * 12 + monthInYear;
+
   const totalDays =
     Math.round((d.getTime() - d3.getTime()) / (1000 * 3600 * 24)) - 1;
   const totalHours = totalDays * 24 + d.getHours();
