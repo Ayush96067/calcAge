@@ -7,6 +7,7 @@ function App() {
   const [message, setMessage] = useState("Fill the inputs to proceed");
   const [correct, setCorrect] = useState(true);
   const [isDisplay, setIsDisplay] = useState(false);
+  const [result, setResult] = useState("");
 
   const d = new Date();
 
@@ -35,8 +36,7 @@ function App() {
 
   const d2 = new Date(`${month}/${date}/${d.getFullYear()}`);
   const d3 = new Date(`${month}/${date}/${year}`);
-  const totalDaysInYear =
-    Math.round((d.getTime() - d2.getTime()) / (1000 * 3600 * 24)) - 1;
+
   const monthInYear =
     month > d.getMonth() ? 12 - month + 1 : d.getMonth() + 1 - month;
   let totalYears = d.getFullYear() - year;
@@ -48,34 +48,74 @@ function App() {
   const totalHours = totalDays * 24 + d.getHours();
   const totalMin = totalHours * 60;
   const totalSecond = Math.round((d.getTime() - d3.getTime()) / 1000);
-  const [result, setResult] = useState("");
+
+  //
+  //
+  //
+
+  const tsecond = Math.round((d.getTime() - d3.getTime()) / 1000);
+  const tmin = Math.round(tsecond / 60);
+  const thour = Math.round(tmin / 60);
+  const tdays = Math.round(thour / 24);
+  const totalDaysYear =
+    Math.round((d.getTime() - d2.getTime()) / (1000 * 3600 * 24)) - 1;
+
+  let tyear = d.getFullYear() - year;
+  console.log(tyear);
+
+  let monthInYr = d.getMonth() - month + 1;
+
+  // if (month > d.getMonth()) {
+  //   if (date < d.getDate()) {
+  //     monthInYr = 12 - month + 1;
+  //   } else {
+  //     monthInYr = 12 - month;
+  //   }
+  //   tyear = tyear - 1;
+  // } else {
+  //   monthInYr = d.getMonth() - month;
+  // }
+
+  const leapYear = d.getFullYear() - (1 % 4) === 0;
+
+  const totalDaysInYear =
+    totalDaysYear < 0
+      ? leapYear
+        ? 366 + totalDaysYear
+        : 365 + totalDaysYear
+      : totalDaysYear;
+  let totalDaysInMonth =
+    d.getDate() > date ? d.getDate() - date : d.getDate() + 31 - date;
 
   function calcAge(option) {
     if (option === "ym") {
-      setResult(`${totalYears} Years and ${monthInYear} Months`);
+      setResult(`${tyear} Years and ${monthInYr} Months`);
     } else if (option === "yd") {
-      setResult(`${totalYears} Years and ${totalDaysInYear} Days`);
+      setResult(`${tyear} Years and ${totalDaysInYear} Days`);
     } else if (option === "md") {
-      setResult(`${totalMonth} Months and ${totalDaysInYear} Days`);
+      setResult(
+        `${totalMonth} Months and ${
+          totalDaysInMonth === 31 ? 0 : totalDaysInMonth
+        } Days`
+      );
     } else if (option === "ty") {
-      setResult(`${totalYears} Years`);
+      setResult(`${tyear} Years`);
     } else if (option === "tm") {
       setResult(`${totalMonth} Months`);
     } else if (option === "td") {
-      setResult(`${totalDays} Days`);
+      setResult(`${tdays} Days`);
     } else if (option === "th") {
-      setResult(`${totalHours} Hours`);
+      setResult(`${thour} Hours`);
     } else if (option === "tmin") {
-      setResult(`${totalMin} Minutes`);
+      setResult(`${tmin} Minutes`);
     } else if (option === "ts") {
-      setResult(`${totalSecond} Seconds`);
+      setResult(`${tsecond} Seconds`);
     } else if (option === "aa") {
       setResult(
-        `${totalYears} Years, ${monthInYear} months, ${d.getDate()} Days ,${d.getHours()} hours, ${d.getMinutes()} Minutes and ${d.getSeconds()} seconds`
+        `${tyear} Years, ${monthInYr} months, ${totalDaysInMonth} Days ,${d.getHours()} hours, ${d.getMinutes()} Minutes and ${d.getSeconds()} seconds`
       );
     }
     setIsDisplay(true);
-    console.log(result);
   }
 
   return (
