@@ -37,18 +37,6 @@ function App() {
   const d2 = new Date(`${month}/${date}/${d.getFullYear()}`);
   const d3 = new Date(`${month}/${date}/${year}`);
 
-  const monthInYear =
-    month > d.getMonth() ? 12 - month + 1 : d.getMonth() + 1 - month;
-  let totalYears = d.getFullYear() - year;
-  totalYears = monthInYear > month ? totalYears - 1 : totalYears;
-  let totalMonth = totalYears * 12 + monthInYear;
-
-  const totalDays =
-    Math.round((d.getTime() - d3.getTime()) / (1000 * 3600 * 24)) - 1;
-  const totalHours = totalDays * 24 + d.getHours();
-  const totalMin = totalHours * 60;
-  const totalSecond = Math.round((d.getTime() - d3.getTime()) / 1000);
-
   //
   //
   //
@@ -61,20 +49,24 @@ function App() {
     Math.round((d.getTime() - d2.getTime()) / (1000 * 3600 * 24)) - 1;
 
   let tyear = d.getFullYear() - year;
-  console.log(tyear);
-
   let monthInYr = d.getMonth() - month + 1;
+  let totalMonth = tyear * 12 + monthInYr;
+  console.log(monthInYr);
 
-  // if (month > d.getMonth()) {
-  //   if (date < d.getDate()) {
-  //     monthInYr = 12 - month + 1;
-  //   } else {
-  //     monthInYr = 12 - month;
-  //   }
-  //   tyear = tyear - 1;
-  // } else {
-  //   monthInYr = d.getMonth() - month;
-  // }
+  if (monthInYr <= 0) {
+    if (date > d.getDate()) monthInYr = 12 - month;
+    else monthInYr = 12 - month + 1;
+    tyear = tyear - 1;
+  } else {
+    monthInYr = d.getMonth() - month;
+  }
+
+  if (monthInYr === 12) {
+    monthInYr = 0;
+    tyear = tyear + 1;
+  }
+
+  if (Number(date) === d.getDate() && monthInYr === 12) monthInYr = 0;
 
   const leapYear = d.getFullYear() - (1 % 4) === 0;
 
@@ -84,6 +76,7 @@ function App() {
         ? 366 + totalDaysYear
         : 365 + totalDaysYear
       : totalDaysYear;
+
   let totalDaysInMonth =
     d.getDate() > date ? d.getDate() - date : d.getDate() + 31 - date;
 
@@ -112,7 +105,9 @@ function App() {
       setResult(`${tsecond} Seconds`);
     } else if (option === "aa") {
       setResult(
-        `${tyear} Years, ${monthInYr} months, ${totalDaysInMonth} Days ,${d.getHours()} hours, ${d.getMinutes()} Minutes and ${d.getSeconds()} seconds`
+        `${tyear} Years, ${monthInYr} months, ${
+          totalDaysInMonth === 31 ? 0 : totalDaysInMonth
+        } Days ,${d.getHours()} hours, ${d.getMinutes()} Minutes and ${d.getSeconds()} seconds`
       );
     }
     setIsDisplay(true);
