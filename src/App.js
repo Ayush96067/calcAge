@@ -50,8 +50,6 @@ function App() {
 
   let tyear = d.getFullYear() - year;
   let monthInYr = d.getMonth() - month + 1;
-  let totalMonth = tyear * 12 + monthInYr;
-  console.log(monthInYr);
 
   if (monthInYr <= 0) {
     if (date > d.getDate()) monthInYr = 12 - month;
@@ -65,6 +63,7 @@ function App() {
     monthInYr = 0;
     tyear = tyear + 1;
   }
+  let totalMonth = tyear * 12 + monthInYr;
 
   if (Number(date) === d.getDate() && monthInYr === 12) monthInYr = 0;
 
